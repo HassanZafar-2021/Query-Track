@@ -1,19 +1,11 @@
 import inquirer from "inquirer";
-import express, { Request, Response } from "express";
-import { connectToDb, pool } from "./connection";
+import { connectToDb, pool } from "./connection.js";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 (async () => {
   await connectToDb();
 })();
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Function to start the CLI application
 const startQuery = () => {
@@ -211,7 +203,4 @@ const updateRole = async () => {
 };
 
 // Start Express server and CLI
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  startQuery();
-});
+startQuery();
